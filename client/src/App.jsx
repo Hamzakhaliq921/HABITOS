@@ -15,6 +15,7 @@ const navItems = [
   { key: 'settings', label: 'Settings', icon: 'ST' },
 ];
 
+
 export default function App() {
   const reportExportRef = useRef(null);
   const { theme, toggleTheme } = useTheme();
@@ -22,6 +23,7 @@ export default function App() {
   const handleNavigation = (page) => {
     setCurrentPage(page === 'prayers' ? 'prayers' : 'overview');
   };
+
   const {
     draft,
     editingHabitId,
@@ -53,6 +55,7 @@ export default function App() {
     summary: prayerSummary,
   } = usePrayerTracker();
 
+  
   return (
     <>
       <DashboardShell
