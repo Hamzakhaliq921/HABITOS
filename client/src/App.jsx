@@ -14,3 +14,11 @@ const navItems = [
   { key: 'goals', label: 'Goals', icon: 'GL' },
   { key: 'settings', label: 'Settings', icon: 'ST' },
 ];
+
+export default function App() {
+  const reportExportRef = useRef(null);
+  const { theme, toggleTheme } = useTheme();
+  const [currentPage, setCurrentPage] = useState('overview');
+  const handleNavigation = (page) => {
+    setCurrentPage(page === 'prayers' ? 'prayers' : 'overview');
+  };
