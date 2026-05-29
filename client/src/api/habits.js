@@ -45,6 +45,7 @@ export async function fetchHabits() {
 
 export async function createHabit(payload) {
   validateHabitPayload(payload);
+  
 
   const habits = getStoredHabits();
   const timestamp = new Date().toISOString();
