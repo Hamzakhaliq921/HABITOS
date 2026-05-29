@@ -297,3 +297,63 @@ function HeatmapSquare({ cx, cy, payload }) {
     </g>
   );
 }
+
+export function HeatmapCalendarChart({ data, monthLabels }) {
+  return (
+    <ChartCard
+      eyebrow="Heatmap calendar"
+      title="Consistency density map"
+      subtitle="Darker cells indicate stronger completion days, giving you a calendar-like view of repetition patterns."
+      action={<span className="rounded-full bg-white/55 px-4 py-2 text-sm font-medium text-sage-700">Last 6 weeks</span>}
+    >
+      <div className="flex h-full flex-col">
+        <div className="mb-3 flex justify-between px-2 text-xs font-semibold uppercase tracking-[0.24em] text-sage-600">
+          {monthLabels.map((label) => (
+            <span key={label}>{label}</span>
+          ))}
+        </div>
+        <div className="h-full">
+          <ResponsiveContainer>
+            <ScatterChart margin={{ top: 8, right: 10, bottom: 4, left: -12 }}>
+              <XAxis
+                type="number"
+                dataKey="week"
+                axisLine={false}
+                tickLine={false}
+                stroke={axisStroke}
+                tickCount={6}
+                domain={[0.5, 6.5]}
+                tickFormatter={(value) => `W${value}`}
+              />
+              <YAxis
+                type="number"
+                dataKey="day"
+                axisLine={false}
+                tickLine={false}
+                stroke={axisStroke}
+                domain={[0.5, 7.5]}
+                ticks={[1, 2, 3, 4, 5, 6, 7]}
+                tickFormatter={(value) => ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][value - 1]}
+                reversed
+              />
+              <Tooltip
+                cursor={{ stroke: 'rgba(69, 91, 66, 0.08)' }}
+                content={
+                  <GlassTooltip
+                    labelFormatter={(_, payload) => payload?.[0]?.payload?.label}
+                    formatter={(value) => [`${value}% complete`, 'Completion']}
+                  />
+                }
+              />
+              <Scatter data={data} shape={<HeatmapSquare />} animationDuration={1000}>
+                {data.map((entry) => (
+                  <Cell key={entry.label} fill={entry.fill} />
+                ))}
+              </Scatter>
+            </ScatterChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+    </ChartCard>
+  );
+}
