@@ -74,3 +74,18 @@ function GlassTooltip({ active, payload, label, labelFormatter, formatter }) {
   );
 }
 
+function ChartLegend({ payload }) {
+  return (
+    <div className="mt-4 flex flex-wrap gap-2">
+      {payload?.map((entry) => (
+        <span
+          key={entry.value}
+          className="rounded-full border border-white/40 bg-white/55 px-3 py-1 text-xs font-semibold text-sage-700"
+        >
+          <span className="mr-2 inline-block h-2.5 w-2.5 rounded-full align-middle" style={{ backgroundColor: entry.color }} />
+          {entry.value}
+        </span>
+      ))}
+    </div>
+  );
+}
