@@ -139,3 +139,238 @@
     transform: translateY(0) translateX(0);
   }
 }
+
+.animate-toast-in {
+  animation: toast-in 220ms ease-out both;
+}
+
+.report-export-shell {
+  position: fixed;
+  left: -10000px;
+  top: 0;
+  width: 794px;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.report-export-root {
+  width: 794px;
+  background: #f4f8f3;
+  color: #213125;
+  font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui;
+}
+
+.report-page {
+  min-height: 1123px;
+  padding: 34px;
+  background:
+    radial-gradient(circle at top left, rgba(191, 214, 187, 0.58), transparent 26%),
+    linear-gradient(160deg, #f8fbf7 0%, #edf4eb 58%, #e2eddc 100%);
+}
+
+.report-hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-start;
+  padding: 28px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #264432 0%, #3a6349 60%, #6f9068 100%);
+  color: #f7fbf7;
+  box-shadow: 0 26px 60px rgba(38, 68, 50, 0.18);
+}
+
+.report-hero-secondary {
+  background: linear-gradient(135deg, #375242 0%, #56785f 65%, #87a37f 100%);
+}
+
+.report-kicker {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  opacity: 0.82;
+}
+
+.report-hero h1 {
+  margin: 12px 0 0;
+  font-family: 'Fraunces', serif;
+  font-size: 40px;
+  line-height: 1.1;
+}
+
+.report-subtitle {
+  max-width: 520px;
+  margin: 14px 0 0;
+  font-size: 14px;
+  line-height: 1.8;
+  opacity: 0.9;
+}
+
+.report-badge {
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.report-stats-grid,
+.report-chart-grid,
+.report-insights-grid,
+.report-achievements-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.report-stats-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 22px;
+}
+
+.report-chart-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 20px;
+}
+
+.report-stat-card,
+.report-chart-card,
+.report-table-card,
+.report-achievements-card,
+.report-insight-card {
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(137, 168, 134, 0.16);
+  box-shadow: 0 18px 44px rgba(37, 60, 42, 0.09);
+}
+
+.report-stat-card {
+  padding: 20px;
+}
+
+.report-stat-label {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #587553;
+}
+
+.report-stat-value {
+  margin: 12px 0 0;
+  font-size: 30px;
+  font-weight: 800;
+  color: #233126;
+}
+
+.report-stat-trend {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: #5a7160;
+}
+
+.report-chart-card,
+.report-achievements-card {
+  padding: 20px;
+}
+
+.report-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.report-chart-header h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #233126;
+}
+
+.report-bar-chart {
+  display: flex;
+  align-items: end;
+  gap: 12px;
+  height: 220px;
+}
+
+.report-bar-group {
+  flex: 1;
+}
+
+.report-bar-track {
+  display: flex;
+  align-items: end;
+  height: 180px;
+  padding: 8px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(221, 234, 218, 0.78), rgba(245, 249, 243, 0.95));
+}
+
+.report-bar-fill {
+  width: 100%;
+  border-radius: 16px;
+}
+
+.report-bar-fill-sage {
+  background: linear-gradient(180deg, #a7c39d 0%, #6f9068 100%);
+}
+
+.report-bar-fill-mint {
+  background: linear-gradient(180deg, #d7edcf 0%, #84a879 100%);
+}
+
+.report-bar-label {
+  display: block;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  color: #587553;
+}
+
+.report-progress-list {
+  display: grid;
+  gap: 14px;
+}
+
+.report-progress-item {
+  display: grid;
+  gap: 8px;
+}
+
+.report-progress-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #2a372d;
+}
+
+.report-progress-track {
+  height: 14px;
+  border-radius: 999px;
+  background: #e6efe3;
+  overflow: hidden;
+}
+
+.report-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.report-heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.report-heatmap-cell {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+}
