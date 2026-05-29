@@ -47,3 +47,30 @@ function ChartCard({ eyebrow, title, subtitle, children, action }) {
     </section>
   );
 }
+
+function GlassTooltip({ active, payload, label, labelFormatter, formatter }) {
+  if (!active || !payload?.length) {
+    return null;
+  }
+
+  return (
+    <div className="rounded-2xl border border-white/40 bg-white/80 px-4 py-3 shadow-glass backdrop-blur-xl">
+      <p className="text-sm font-semibold text-sage-900">{labelFormatter ? labelFormatter(label, payload) : label}</p>
+      <div className="mt-2 space-y-1.5">
+        {payload.map((entry) => {
+          const formatted = formatter ? formatter(entry.value, entry.name, entry, payload) : entry.value;
+          const value = Array.isArray(formatted) ? formatted[0] : formatted;
+          const name = Array.isArray(formatted) ? formatted[1] : entry.name;
+
+          return (
+            <div key={`${entry.dataKey}-${entry.name}`} className="flex items-center justify-between gap-4 text-sm">
+              <span className="font-medium text-sage-700">{name}</span>
+              <span className="font-semibold text-sage-900">{value}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
