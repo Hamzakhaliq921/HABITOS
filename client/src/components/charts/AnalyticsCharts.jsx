@@ -357,3 +357,18 @@ export function HeatmapCalendarChart({ data, monthLabels }) {
     </ChartCard>
   );
 }
+
+function AnalyticsChartsComponent({ datasets }) {
+  return (
+    <section className="grid gap-4 xl:grid-cols-2 xl:gap-6">
+      <WeeklyProgressChart data={datasets.weeklyProgress} />
+      <MonthlyConsistencyChart data={datasets.monthlyConsistency} />
+      <ProductivityAnalyticsChart data={datasets.productivity} />
+      <CompletionRateChart data={datasets.completionRate} />
+      <StreakTrendsChart data={datasets.streakTrends} />
+      <HeatmapCalendarChart data={datasets.heatmapCalendar} monthLabels={datasets.heatmapMonths} />
+    </section>
+  );
+}
+
+export const AnalyticsCharts = memo(AnalyticsChartsComponent);
