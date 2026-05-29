@@ -40,3 +40,102 @@
   * {
     @apply border-white/20;
   }
+
+  body {
+    min-height: 100vh;
+    color: var(--app-text);
+    background: var(--app-background);
+    @apply font-sans;
+    transition: background 240ms ease, color 240ms ease;
+  }
+
+  #root {
+    @apply min-h-screen;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    box-shadow: var(--glass-shadow);
+    @apply backdrop-blur-xl;
+  }
+
+  .glass-panel-strong {
+    border: 1px solid color-mix(in srgb, var(--glass-border) 90%, white 10%);
+    background: var(--glass-bg-strong);
+    box-shadow: var(--glass-shadow);
+    @apply backdrop-blur-2xl;
+  }
+
+  .section-title {
+    color: var(--section-title);
+    @apply text-sm font-semibold uppercase tracking-[0.24em];
+  }
+
+  .recharts-default-tooltip {
+    @apply !border-none !bg-transparent !shadow-none;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.theme-dark .text-sage-900,
+.theme-dark .text-sage-800,
+.theme-dark .text-sage-700 {
+  color: #e8f2ea !important;
+}
+
+.theme-dark .text-sage-600 {
+  color: #b7cdbb !important;
+}
+
+.theme-dark .bg-white\/50,
+.theme-dark .bg-white\/55,
+.theme-dark .bg-white\/60,
+.theme-dark .bg-white\/45,
+.theme-dark .bg-white\/40,
+.theme-dark .bg-white\/35 {
+  background-color: rgba(19, 32, 26, 0.62) !important;
+}
+
+.theme-dark .border-white\/40,
+.theme-dark .border-white\/45,
+.theme-dark .border-white\/35,
+.theme-dark .border-white\/50 {
+  border-color: rgba(193, 219, 198, 0.12) !important;
+}
+
+.theme-dark .from-sage-200\/70,
+.theme-dark .from-emerald-200\/70,
+.theme-dark .from-sky-200\/70,
+.theme-dark .from-amber-100\/80 {
+  --tw-gradient-from: rgba(33, 60, 45, 0.78) var(--tw-gradient-from-position) !important;
+}
+
+.theme-dark .to-white\/10,
+.theme-dark .to-emerald-50\/20 {
+  --tw-gradient-to: rgba(13, 21, 17, 0.16) var(--tw-gradient-to-position) !important;
+}
+
+.theme-dark .empty-state,
+.theme-dark .theme-toggle {
+  box-shadow: 0 22px 80px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) translateX(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+  }
+}
