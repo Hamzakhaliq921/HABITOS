@@ -167,3 +167,41 @@ export function MonthlyConsistencyChart({ data }) {
     </ChartCard>
   );
 }
+
+export function ProductivityAnalyticsChart({ data }) {
+  return (
+    <ChartCard
+      eyebrow="Productivity analytics"
+      title="Focus hours and output"
+      subtitle="Interactive bars and a support line show where productive time is translating into completed sessions."
+      action={<span className="rounded-full bg-white/55 px-4 py-2 text-sm font-medium text-sage-700">Peak on Friday</span>}
+    >
+      <ResponsiveContainer>
+        <BarChart data={data} margin={{ top: 10, right: 10, left: -18, bottom: 0 }} barGap={10}>
+          <CartesianGrid stroke={gridStroke} vertical={false} />
+          <XAxis dataKey="day" axisLine={false} tickLine={false} stroke={axisStroke} />
+          <YAxis yAxisId="left" axisLine={false} tickLine={false} stroke={axisStroke} />
+          <YAxis yAxisId="right" orientation="right" axisLine={false} tickLine={false} stroke={axisStroke} />
+          <Tooltip content={<GlassTooltip />} />
+          <Legend content={<ChartLegend />} />
+          <Bar
+            yAxisId="left"
+            dataKey="focusHours"
+            name="Focus hours"
+            fill={chartPalette.sage}
+            radius={[14, 14, 6, 6]}
+            animationDuration={900}
+          />
+          <Bar
+            yAxisId="right"
+            dataKey="sessions"
+            name="Completed sessions"
+            fill={chartPalette.sageGlow}
+            radius={[14, 14, 6, 6]}
+            animationDuration={1000}
+          />
+        </BarChart>
+      </ResponsiveContainer>
+    </ChartCard>
+  );
+}
