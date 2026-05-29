@@ -126,3 +126,44 @@ export function WeeklyProgressChart({ data }) {
     </ChartCard>
   );
 }
+
+export function MonthlyConsistencyChart({ data }) {
+  return (
+    <ChartCard
+      eyebrow="Monthly consistency graph"
+      title="Consistency over four weeks"
+      subtitle="The trend line smooths daily noise so it is easier to spot routine stability."
+      action={<span className="rounded-full bg-white/55 px-4 py-2 text-sm font-medium text-sage-700">30-day window</span>}
+    >
+      <ResponsiveContainer>
+        <LineChart data={data} margin={{ top: 10, right: 10, left: -18, bottom: 0 }}>
+          <CartesianGrid stroke={gridStroke} vertical={false} />
+          <XAxis dataKey="week" axisLine={false} tickLine={false} stroke={axisStroke} />
+          <YAxis axisLine={false} tickLine={false} stroke={axisStroke} domain={[60, 100]} tickFormatter={(value) => `${value}%`} />
+          <Tooltip content={<GlassTooltip formatter={(value, name) => [`${value}%`, name]} />} />
+          <Legend content={<ChartLegend />} />
+          <Line
+            type="monotone"
+            dataKey="consistency"
+            name="Consistency"
+            stroke={chartPalette.sage}
+            strokeWidth={3}
+            dot={{ r: 4, fill: chartPalette.sage }}
+            activeDot={{ r: 6 }}
+            animationDuration={950}
+          />
+          <Line
+            type="monotone"
+            dataKey="target"
+            name="Target"
+            stroke={chartPalette.sageSoft}
+            strokeWidth={2}
+            strokeDasharray="6 6"
+            dot={false}
+            animationDuration={950}
+          />
+        </LineChart>
+      </ResponsiveContainer>
+    </ChartCard>
+  );
+}
