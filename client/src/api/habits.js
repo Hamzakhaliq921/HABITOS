@@ -74,7 +74,7 @@ export async function updateHabit(id, payload) {
   if (habitIndex === -1) {
     throw new Error('Habit not found.');
   }
-  
+
 
   const updatedHabit = {
     ...habits[habitIndex],
@@ -103,16 +103,3 @@ export async function completeHabit(id, date) {
   if (habitIndex === -1) {
     throw new Error('Habit not found.');
   }
-
-  const completionDate = date || new Date().toISOString().split('T')[0];
-  const completionDates = Array.from(new Set([...(habits[habitIndex].completionDates || []), completionDate])).sort();
-  const updatedHabit = {
-    ...habits[habitIndex],
-    completionDates,
-    updatedAt: new Date().toISOString(),
-  };
-
-  habits[habitIndex] = updatedHabit;
-  saveStoredHabits(habits);
-  return updatedHabit;
-}
