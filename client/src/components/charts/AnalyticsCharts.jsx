@@ -205,3 +205,36 @@ export function ProductivityAnalyticsChart({ data }) {
     </ChartCard>
   );
 }
+
+export function CompletionRateChart({ data }) {
+  return (
+    <ChartCard
+      eyebrow="Habit completion rate"
+      title="Completion by habit"
+      subtitle="Each ring shows how reliably a core habit is getting finished this month."
+      action={<span className="rounded-full bg-white/55 px-4 py-2 text-sm font-medium text-sage-700">4 tracked habits</span>}
+    >
+      <ResponsiveContainer>
+        <RadialBarChart
+          data={data}
+          innerRadius="22%"
+          outerRadius="92%"
+          barSize={18}
+          startAngle={180}
+          endAngle={0}
+        >
+          <PolarGrid gridType="circle" radialLines={false} stroke="rgba(69, 91, 66, 0.08)" />
+          <PolarAngleAxis type="number" domain={[0, 100]} tick={false} />
+          <PolarRadiusAxis tick={false} axisLine={false} />
+          <Tooltip content={<GlassTooltip formatter={(value, name) => [`${value}%`, name]} />} />
+          <RadialBar background dataKey="value" cornerRadius={18} animationDuration={1000}>
+            {data.map((entry) => (
+              <Cell key={entry.name} fill={entry.fill} />
+            ))}
+          </RadialBar>
+          <Legend iconSize={10} layout="vertical" verticalAlign="middle" align="right" content={<ChartLegend />} />
+        </RadialBarChart>
+      </ResponsiveContainer>
+    </ChartCard>
+  );
+}
