@@ -89,3 +89,40 @@ function ChartLegend({ payload }) {
     </div>
   );
 }
+
+export function WeeklyProgressChart({ data }) {
+  const average = Math.round(data.reduce((sum, item) => sum + item.completion, 0) / data.length);
+
+  return (
+    <ChartCard
+      eyebrow="Weekly progress chart"
+      title="Daily completion flow"
+      subtitle="Hover to compare how your energy and follow-through moved throughout the week."
+      action={<span className="rounded-full bg-white/55 px-4 py-2 text-sm font-medium text-sage-700">{average}% avg</span>}
+    >
+      <ResponsiveContainer>
+        <AreaChart data={data} margin={{ top: 10, right: 6, left: -18, bottom: 0 }}>
+          <defs>
+            <linearGradient id="weeklyGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor={chartPalette.sage} stopOpacity={0.9} />
+              <stop offset="95%" stopColor={chartPalette.sageGlow} stopOpacity={0.08} />
+            </linearGradient>
+          </defs>
+          <CartesianGrid stroke={gridStroke} vertical={false} />
+          <XAxis dataKey="day" axisLine={false} tickLine={false} stroke={axisStroke} />
+          <YAxis axisLine={false} tickLine={false} stroke={axisStroke} domain={[0, 100]} tickFormatter={(value) => `${value}%`} />
+          <Tooltip content={<GlassTooltip formatter={(value, name) => [`${value}%`, name]} />} />
+          <Area
+            type="monotone"
+            dataKey="completion"
+            stroke={chartPalette.sageDeep}
+            strokeWidth={3}
+            fill="url(#weeklyGradient)"
+            activeDot={{ r: 6, fill: chartPalette.sageDeep, stroke: '#fff', strokeWidth: 2 }}
+            animationDuration={900}
+          />
+        </AreaChart>
+      </ResponsiveContainer>
+    </ChartCard>
+  );
+}
