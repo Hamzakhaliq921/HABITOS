@@ -45,7 +45,7 @@ export async function fetchHabits() {
 
 export async function createHabit(payload) {
   validateHabitPayload(payload);
-  
+
 
   const habits = getStoredHabits();
   const timestamp = new Date().toISOString();
@@ -74,6 +74,7 @@ export async function updateHabit(id, payload) {
   if (habitIndex === -1) {
     throw new Error('Habit not found.');
   }
+  
 
   const updatedHabit = {
     ...habits[habitIndex],
