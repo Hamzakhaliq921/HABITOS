@@ -239,3 +239,61 @@ export function CompletionRateChart({ data }) {
   );
 }
 
+export function StreakTrendsChart({ data }) {
+  return (
+    <ChartCard
+      eyebrow="Streak trends"
+      title="Current vs best streak"
+      subtitle="This view makes it easy to see whether your active momentum is closing the gap to your best run."
+      action={<span className="rounded-full bg-white/55 px-4 py-2 text-sm font-medium text-sage-700">Momentum building</span>}
+    >
+      <ResponsiveContainer>
+        <LineChart data={data} margin={{ top: 10, right: 10, left: -18, bottom: 0 }}>
+          <CartesianGrid stroke={gridStroke} vertical={false} />
+          <XAxis dataKey="week" axisLine={false} tickLine={false} stroke={axisStroke} />
+          <YAxis axisLine={false} tickLine={false} stroke={axisStroke} />
+          <Tooltip content={<GlassTooltip formatter={(value, name) => [`${value} days`, name]} />} />
+          <Legend content={<ChartLegend />} />
+          <Line
+            type="monotone"
+            dataKey="current"
+            name="Current streak"
+            stroke={chartPalette.sageDeep}
+            strokeWidth={3}
+            activeDot={{ r: 6 }}
+            animationDuration={900}
+          />
+          <Line
+            type="monotone"
+            dataKey="best"
+            name="Best streak"
+            stroke={chartPalette.sageSoft}
+            strokeWidth={3}
+            strokeDasharray="5 5"
+            dot={{ r: 3 }}
+            animationDuration={1050}
+          />
+        </LineChart>
+      </ResponsiveContainer>
+    </ChartCard>
+  );
+}
+
+function HeatmapSquare({ cx, cy, payload }) {
+  const size = 22;
+
+  return (
+    <g>
+      <rect
+        x={cx - size / 2}
+        y={cy - size / 2}
+        width={size}
+        height={size}
+        rx={8}
+        fill={payload.fill}
+        fillOpacity={0.95}
+        stroke="rgba(255,255,255,0.65)"
+      />
+    </g>
+  );
+}
