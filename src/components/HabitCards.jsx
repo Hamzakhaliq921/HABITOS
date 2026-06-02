@@ -152,3 +152,34 @@ export function HabitCards({ habits = [], onComplete }) {
     </section>
   );
 }
+
+export const sampleHabits = [
+  {
+    id: "1",
+    title: "Morning Walk",
+    category: "Wellness",
+    completedToday: 3,
+    dailyGoal: 5,
+    weeklyGoal: 30,
+    streakCount: 12
+  },
+  {
+    id: "2",
+    title: "Read 20 Pages",
+    category: "Learning",
+    completedToday: 1,
+    dailyGoal: 1,
+    weeklyGoal: 7,
+    streakCount: 28
+  },
+  {
+    id: "3",
+    title: "Drink Water",
+    category: "Health",
+    completedToday: 6,
+    dailyGoal: 8,
+    weeklyGoal: 56,
+    streakCount: 9
+  }
+];
+
