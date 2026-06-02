@@ -70,6 +70,7 @@ function ProgressRing({ progress, label }) {
   );
 }
 
+
 function HabitCard({ habit, index, onComplete }) {
   const progress = getProgress(habit.completedToday, habit.dailyGoal);
   const isComplete = progress >= 100;
@@ -132,54 +133,3 @@ function HabitCard({ habit, index, onComplete }) {
     </motion.article>
   );
 }
-
-export function HabitCards({ habits = [], onComplete }) {
-  return (
-    <section className="relative overflow-hidden rounded-[32px] bg-[linear-gradient(180deg,#6d8f72_0%,#52705b_100%)] px-4 py-6 sm:px-6 sm:py-8">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_35%)]" />
-
-      <div className="relative mx-auto grid max-w-6xl gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {habits.map((habit, index) => (
-          <HabitCard
-            key={habit.id || habit._id || `${habit.title}-${index}`}
-            habit={habit}
-            index={index}
-            onComplete={onComplete}
-          />
-        ))}
-      </div>
-    </section>
-  );
-}
-
-export const sampleHabits = [
-  {
-    id: "1",
-    title: "Morning Walk",
-    category: "Wellness",
-    completedToday: 3,
-    dailyGoal: 5,
-    weeklyGoal: 30,
-    streakCount: 12
-  },
-  {
-    id: "2",
-    title: "Read 20 Pages",
-    category: "Learning",
-    completedToday: 1,
-    dailyGoal: 1,
-    weeklyGoal: 7,
-    streakCount: 28
-  },
-  {
-    id: "3",
-    title: "Drink Water",
-    category: "Health",
-    completedToday: 6,
-    dailyGoal: 8,
-    weeklyGoal: 56,
-    streakCount: 9
-  }
-];
-
-export default HabitCards;
