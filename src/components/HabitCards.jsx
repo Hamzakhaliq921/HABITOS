@@ -183,3 +183,4 @@ export const sampleHabits = [
   }
 ];
 
+export default HabitCards;
