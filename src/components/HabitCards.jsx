@@ -9,3 +9,18 @@ const getProgress = (completed = 0, target = 1) => {
 
   return clamp((completed / target) * 100, 0, 100);
 };
+
+const ringCircumference = 2 * Math.PI * 42;
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (index) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: index * 0.08,
+      duration: 0.45,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  })
+};
