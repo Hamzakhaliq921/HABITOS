@@ -133,3 +133,22 @@ function HabitCard({ habit, index, onComplete }) {
     </motion.article>
   );
 }
+
+export function HabitCards({ habits = [], onComplete }) {
+  return (
+    <section className="relative overflow-hidden rounded-[32px] bg-[linear-gradient(180deg,#6d8f72_0%,#52705b_100%)] px-4 py-6 sm:px-6 sm:py-8">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_35%)]" />
+
+      <div className="relative mx-auto grid max-w-6xl gap-5 md:grid-cols-2 xl:grid-cols-3">
+        {habits.map((habit, index) => (
+          <HabitCard
+            key={habit.id || habit._id || `${habit.title}-${index}`}
+            habit={habit}
+            index={index}
+            onComplete={onComplete}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
