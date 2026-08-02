@@ -35,3 +35,41 @@ const getAllHabits = asyncHandler(async (req, res) => {
   });
 });
 
+const updateHabit = asyncHandler(async (req, res) => {
+  const { name, description, frequency, targetDays, color } = req.body;
+
+  const habit = await Habit.findById(req.params.id);
+
+  if (!habit) {
+    throw new AppError("Habit not found", 404);
+  }
+
+  if (name !== undefined) {
+    habit.name = name.trim();
+  }
+
+  if (description !== undefined) {
+    habit.description = description;
+  }
+
+  if (frequency !== undefined) {
+    habit.frequency = frequency;
+  }
+
+  if (targetDays !== undefined) {
+    habit.targetDays = targetDays;
+  }
+
+  if (color !== undefined) {
+    habit.color = color;
+  }
+
+  await habit.save();
+
+  res.status(200).json({
+    success: true,
+    message: "Habit updated successfully",
+    data: habit
+  });
+});
+
