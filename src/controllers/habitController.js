@@ -94,3 +94,84 @@ const markHabitComplete = asyncHandler(async (req, res) => {
   if (!habit) {
     throw new AppError("Habit not found", 404);
   }
+
+  const completionDateKey = req.completionDateKey;
+  const alreadyCompleted = habit.completionDates.includes(completionDateKey);
+
+  if (!alreadyCompleted) {
+    habit.completionDates.push(completionDateKey);
+    habit.completionDates.sort();
+    await habit.save();
+  }
+
+  res.status(200).json({
+    success: true,
+    message: alreadyCompleted
+      ? "Habit was already marked complete for this date"
+      : "Habit marked complete successfully",
+    data: habit
+  });
+});
+
+const getAnalyticsData = asyncHandler(async (req, res) => {
+  const habits = await Habit.find();
+  const today = formatDateKey();
+
+  const totalHabits = habits.length;
+  const completedToday = habits.filter((habit) => habit.completionDates.includes(today)).length;
+  const totalCompletions = habits.reduce(
+    (sum, habit) => sum + habit.completionDates.length,
+    0
+  );
+
+  const streaks = habits.map((habit) => ({
+    currentStreak: calculateCurrentStreak(habit.completionDates),
+    longestStreak: calculateLongestStreak(habit.completionDates)
+  }));
+
+  const analytics = {
+    totalHabits,
+    completedToday,
+    totalCompletions,
+    completionRate: totalHabits === 0 ? 0 : Number(((completedToday / totalHabits) * 100).toFixed(2)),
+    longestCurrentStreak: streaks.length ? Math.max(...streaks.map((item) => item.currentStreak)) : 0,
+    longestOverallStreak: streaks.length ? Math.max(...streaks.map((item) => item.longestStreak)) : 0
+  };
+
+  res.status(200).json({
+    success: true,
+    data: analytics
+  });
+});
+
+const getStreakData = asyncHandler(async (req, res) => {
+  const habits = await Habit.find().sort({ createdAt: -1 });
+
+  const streakData = habits.map((habit) => ({
+    id: habit._id,
+    name: habit.name,
+    frequency: habit.frequency,
+    currentStreak: calculateCurrentStreak(habit.completionDates),
+    longestStreak: calculateLongestStreak(habit.completionDates),
+    totalCompletions: habit.completionDates.length,
+    lastCompletedDate: habit.completionDates.length
+      ? habit.completionDates[habit.completionDates.length - 1]
+      : null
+  }));
+
+  res.status(200).json({
+    success: true,
+    count: streakData.length,
+    data: streakData
+  });
+});
+
+module.exports = {
+  createHabit,
+  getAllHabits,
+  updateHabit,
+  deleteHabit,
+  markHabitComplete,
+  getAnalyticsData,
+  getStreakData
+};
