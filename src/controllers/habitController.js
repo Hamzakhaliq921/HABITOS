@@ -166,6 +166,7 @@ const getStreakData = asyncHandler(async (req, res) => {
   });
 });
 
+
 module.exports = {
   createHabit,
   getAllHabits,
