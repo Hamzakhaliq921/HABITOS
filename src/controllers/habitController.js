@@ -24,3 +24,14 @@ const createHabit = asyncHandler(async (req, res) => {
     data: habit
   });
 });
+
+const getAllHabits = asyncHandler(async (req, res) => {
+  const habits = await Habit.find().sort({ createdAt: -1 });
+
+  res.status(200).json({
+    success: true,
+    count: habits.length,
+    data: habits
+  });
+});
+
