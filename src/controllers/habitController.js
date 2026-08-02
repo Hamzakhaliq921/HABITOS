@@ -73,3 +73,17 @@ const updateHabit = asyncHandler(async (req, res) => {
   });
 });
 
+const deleteHabit = asyncHandler(async (req, res) => {
+  const habit = await Habit.findById(req.params.id);
+
+  if (!habit) {
+    throw new AppError("Habit not found", 404);
+  }
+
+  await habit.deleteOne();
+
+  res.status(200).json({
+    success: true,
+    message: "Habit deleted successfully"
+  });
+});
