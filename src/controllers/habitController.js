@@ -87,3 +87,10 @@ const deleteHabit = asyncHandler(async (req, res) => {
     message: "Habit deleted successfully"
   });
 });
+
+const markHabitComplete = asyncHandler(async (req, res) => {
+  const habit = await Habit.findById(req.params.id);
+
+  if (!habit) {
+    throw new AppError("Habit not found", 404);
+  }
