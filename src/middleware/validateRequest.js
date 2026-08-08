@@ -42,3 +42,28 @@ const validateHabitBody = (req, res, next) => {
 
   return next();
 };
+
+const validateObjectId = (req, res, next) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return next(new AppError("Invalid habit id", 400));
+  }
+
+  return next();
+};
+
+const validateCompletionBody = (req, res, next) => {
+  const dateKey = req.body.date ? formatDateKey(req.body.date) : formatDateKey();
+
+  if (!dateKey) {
+    return next(new AppError("Completion date must be a valid date", 400));
+  }
+
+  req.completionDateKey = dateKey;
+  return next();
+};
+
+module.exports = {
+  validateHabitBody,
+  validateObjectId,
+  validateCompletionBody
+};
