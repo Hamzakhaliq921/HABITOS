@@ -37,3 +37,13 @@ const habitCompletionSchema = new Schema(
   }
 );
 
+habitCompletionSchema.index({ habit: 1, completedOn: -1 });
+habitCompletionSchema.index(
+  { habit: 1, completedOn: 1 },
+  {
+    unique: true,
+    partialFilterExpression: { habit: { $exists: true }, completedOn: { $exists: true } }
+  }
+);
+
+module.exports = mongoose.model("HabitCompletion", habitCompletionSchema);
