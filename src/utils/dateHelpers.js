@@ -52,3 +52,17 @@ const calculateLongestStreak = (completionDates) => {
   const uniqueSortedDates = [...new Set(completionDates)].sort();
   let longestStreak = 1;
   let currentStreak = 1;
+
+  for (let index = 1; index < uniqueSortedDates.length; index += 1) {
+    const dayDifference = differenceInDays(uniqueSortedDates[index], uniqueSortedDates[index - 1]);
+
+    if (dayDifference === 1) {
+      currentStreak += 1;
+      longestStreak = Math.max(longestStreak, currentStreak);
+    } else {
+      currentStreak = 1;
+    }
+  }
+
+  return longestStreak;
+};
