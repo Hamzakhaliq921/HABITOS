@@ -66,3 +66,9 @@ const calculateLongestStreak = (completionDates) => {
 
   return longestStreak;
 };
+
+module.exports = {
+  formatDateKey,
+  calculateCurrentStreak,
+  calculateLongestStreak
+};
