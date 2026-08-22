@@ -43,3 +43,8 @@ const calculateCurrentStreak = (completionDates) => {
 
   return streak;
 };
+
+const calculateLongestStreak = (completionDates) => {
+  if (!completionDates.length) {
+    return 0;
+  }
