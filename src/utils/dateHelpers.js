@@ -16,3 +16,8 @@ const differenceInDays = (laterDateKey, earlierDateKey) => {
 
   return Math.round((later - earlier) / MS_PER_DAY);
 };
+
+const calculateCurrentStreak = (completionDates) => {
+  if (!completionDates.length) {
+    return 0;
+  }
