@@ -21,3 +21,10 @@ const calculateCurrentStreak = (completionDates) => {
   if (!completionDates.length) {
     return 0;
   }
+
+  const uniqueSortedDates = [...new Set(completionDates)].sort().reverse();
+  const today = formatDateKey();
+
+  if (uniqueSortedDates[0] !== today) {
+    return 0;
+  }
