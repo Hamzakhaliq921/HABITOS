@@ -48,3 +48,7 @@ const calculateLongestStreak = (completionDates) => {
   if (!completionDates.length) {
     return 0;
   }
+
+  const uniqueSortedDates = [...new Set(completionDates)].sort();
+  let longestStreak = 1;
+  let currentStreak = 1;
