@@ -28,3 +28,7 @@ const calculateCurrentStreak = (completionDates) => {
   if (uniqueSortedDates[0] !== today) {
     return 0;
   }
+
+  let streak = 1;
+
+  
