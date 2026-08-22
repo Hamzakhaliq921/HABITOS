@@ -10,3 +10,6 @@ const formatDateKey = (dateInput = new Date()) => {
   return date.toISOString().split("T")[0];
 };
 
+const differenceInDays = (laterDateKey, earlierDateKey) => {
+  const later = new Date(`${laterDateKey}T00:00:00.000Z`);
+  const earlier = new Date(`${earlierDateKey}T00:00:00.000Z`);
