@@ -31,4 +31,15 @@ const calculateCurrentStreak = (completionDates) => {
 
   let streak = 1;
 
-  
+  for (let index = 1; index < uniqueSortedDates.length; index += 1) {
+    const dayDifference = differenceInDays(uniqueSortedDates[index - 1], uniqueSortedDates[index]);
+
+    if (dayDifference === 1) {
+      streak += 1;
+    } else {
+      break;
+    }
+  }
+
+  return streak;
+};
